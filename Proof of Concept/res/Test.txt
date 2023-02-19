@@ -1,0 +1,5 @@
+1) Line 1
+2) Second line
+3) Line number 3
+
+Highscore=50
