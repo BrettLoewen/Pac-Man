@@ -26,6 +26,7 @@ input = Input()
 Logger.set_window(window)
 
 # Create the object which will run the game
+# This should be modified to create a PacMan game
 game = GameManager(rend, input)
 
 # Main loop
