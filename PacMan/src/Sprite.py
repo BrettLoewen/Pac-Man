@@ -1,13 +1,14 @@
 import pygame
 
 class Sprite:
-    def __init__(self, image_path, x, y, renderer):
+    def __init__(self, image_path, x, y, renderer, scale):
         self.generate_images(image_path)
         self.x = x
         self.y = y
         self.angle = 0
         self.rend = renderer
         renderer.add_sprite(self) # This allows the sprite to be drawn
+        self.set_scale(scale, scale)
 
     # Sets the image's size
     def set_scale(self, x_scale, y_scale):

@@ -3,12 +3,13 @@ from src.Renderer import Renderer
 from src.Input import Input
 import src.Logger as Logger
 from src.GameManager import GameManager
+from src.PacMan import PacMan
 
 # Start pygame
 pygame.init()
 
 # Create the game window and set its size and name
-window = pygame.display.set_mode((800,600)) 
+window = pygame.display.set_mode((690,759)) 
 pygame.display.set_caption("Proof of Concept")
 
 # Create the clock to manage time and set the frame rate
@@ -27,7 +28,7 @@ Logger.set_window(window)
 
 # Create the object which will run the game
 # This should be modified to create a PacMan game
-game = GameManager(rend, input)
+game = PacMan(rend, input)
 
 # Main loop
 run = True

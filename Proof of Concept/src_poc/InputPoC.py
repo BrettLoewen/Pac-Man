@@ -20,7 +20,7 @@ class InputPoC(GameManager):
         self.sprite = Sprite(['Proof of Concept/res/textures/PacMan_0.png', 'Proof of Concept/res/textures/PacMan_1.png', 'Proof of Concept/res/textures/PacMan_2.png', 'Proof of Concept/res/textures/PacMan_1.png'], self.x, self.y, rend)
         self.sprite.set_scale(self.width, self.height)
 
-        # Create an animated sprite
+        # Create a static sprite
         self.sprite2 = Sprite(['Proof of Concept/res/textures/PacMan_1.png'], self.x, self.y, rend)
         self.sprite2.set_scale(self.width, self.height)
 
