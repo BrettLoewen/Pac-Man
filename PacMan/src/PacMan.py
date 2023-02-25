@@ -1,40 +1,37 @@
+import src.Logger as Logger
 from src.Sprite import Sprite
 from src.Input import Input
 from src.Renderer import Renderer
 from src.GameManager import GameManager
 from src.Grid import Grid
-
-SIZE_MULTIPLIER = 3
-ENTITY_SIZE = 13 * SIZE_MULTIPLIER
-GRID_CELL_SIZE = 23 * SIZE_MULTIPLIER
+from src.Grid import GridCell
+import math
+from src.PacManController import PacManController
 
 class PacMan(GameManager):
     def __init__(self, rend: Renderer, input: Input):
         GameManager.__init__(self, rend, input)
 
-        self.grid = Grid(rend, GRID_CELL_SIZE)
+        self.SIZE_MULTIPLIER = 3
+        self.ENTITY_SIZE = 13 * self.SIZE_MULTIPLIER
+        self.GRID_CELL_SIZE = 23 * self.SIZE_MULTIPLIER
 
-        self.x = 50
-        self.y = 50
-        self.width = ENTITY_SIZE
-        self.height = ENTITY_SIZE
+        self.grid = Grid(rend, self.GRID_CELL_SIZE)
+
+        self.pacman = PacManController(self)
+
+        starting_cell = self.grid.cells[48]
+        self.x = starting_cell.x + (self.GRID_CELL_SIZE // 2) + (self.ENTITY_SIZE // 2)
+        self.y = starting_cell.y + (self.GRID_CELL_SIZE // 2) - (self.ENTITY_SIZE // 2)
+        self.width = self.ENTITY_SIZE
+        self.height = self.ENTITY_SIZE
         self.speed = 2
-
-        # Create an animated sprite
-        self.sprite = Sprite(['PacMan/res/textures/PacMan_0.png', 'PacMan/res/textures/PacMan_1.png', 'PacMan/res/textures/PacMan_2.png', 'PacMan/res/textures/PacMan_1.png'], self.x, self.y, rend, ENTITY_SIZE)
-
+        self.sprite = Sprite("PacMan/res/textures/Inky_Left_0.png", self.x, self.y, rend, self.ENTITY_SIZE)
 
     def on_update(self):
-        # If the user has pressed movement keys, move the sprite
-        if self.input.pressed_left():
-            self.sprite.x -= self.speed
-            self.sprite.set_rotation(180)
-        if self.input.pressed_right():
-            self.sprite.x += self.speed
-            self.sprite.set_rotation(0)
-        if self.input.pressed_up():
-            self.sprite.y -= self.speed
-            self.sprite.set_rotation(90)
-        if self.input.pressed_down():
-            self.sprite.y += self.speed
-            self.sprite.set_rotation(-90)
+        self.pacman.on_update()
+
+    def find_path(self):
+        path = []
+
+        
