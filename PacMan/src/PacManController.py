@@ -1,10 +1,10 @@
 import src.Logger as Logger
 from src.Sprite import Sprite
-from src.Input import Input
-from src.Renderer import Renderer
 from src.GameManager import GameManager
-from src.Grid import Grid
+from src.Collider import Collider
 import math
+
+SPEED = 2
 
 class PacManController():
     def __init__(self, game_manager: GameManager):
@@ -12,15 +12,17 @@ class PacManController():
         self.input = self.game_manager.input
 
         starting_cell = self.game_manager.grid.cells[52]
-        self.x = starting_cell.x + (game_manager.GRID_CELL_SIZE // 2) + (game_manager.ENTITY_SIZE // 2)
-        self.y = starting_cell.y + (game_manager.GRID_CELL_SIZE // 2) - (game_manager.ENTITY_SIZE // 2)
+        x = starting_cell.x + (game_manager.GRID_CELL_SIZE // 2) + (game_manager.ENTITY_SIZE // 2)
+        y = starting_cell.y + (game_manager.GRID_CELL_SIZE // 2) - (game_manager.ENTITY_SIZE // 2)
         self.width = game_manager.ENTITY_SIZE
         self.height = game_manager.ENTITY_SIZE
-        self.speed = 2
+        self.speed = SPEED
+
+        self.collider = Collider(x, y, game_manager.ENTITY_SIZE, game_manager.ENTITY_SIZE, "PacMan")
 
         # Create an animated sprite
         image_paths = ['PacMan/res/textures/PacMan_0.png', 'PacMan/res/textures/PacMan_1.png', 'PacMan/res/textures/PacMan_2.png', 'PacMan/res/textures/PacMan_1.png']
-        self.sprite = Sprite(image_paths, self.x, self.y, game_manager.rend, game_manager.ENTITY_SIZE)
+        self.sprite = Sprite(image_paths, x, y, game_manager.rend, game_manager.ENTITY_SIZE)
         self.sprite.set_rotation(180)
         self.direction = 3
         self.input_direction = 3
@@ -68,6 +70,11 @@ class PacManController():
         elif self.direction == 3:
             self.sprite.x -= self.speed
             self.sprite.set_rotation(180)
+
+        self.collider.x = self.sprite.x
+        self.collider.y = self.sprite.y
+
+        Logger.info(self.collider.overlaps_collider_with_tag("Ghost"))
         
         # Logger.set_line_color(Logger.LineColor.GREEN)
         for cell in self.game_manager.grid.cells:
