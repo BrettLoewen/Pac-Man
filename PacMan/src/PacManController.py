@@ -74,7 +74,7 @@ class PacManController():
         self.collider.x = self.sprite.x
         self.collider.y = self.sprite.y
 
-        Logger.info(self.collider.overlaps_collider_with_tag("Ghost"))
+        # Logger.info(self.collider.overlaps_collider_with_tag("Ghost"))
         
         # Logger.set_line_color(Logger.LineColor.GREEN)
         for cell in self.game_manager.grid.cells:
