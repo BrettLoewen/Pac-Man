@@ -26,16 +26,19 @@ class PacMan(GameManager):
 
         self.pacman = PacManController(self)
 
-        # self.ghost = GhostBlinky(self)
-        # self.ghost = GhostPinky(self)
-        # self.ghost = GhostInky(self)
-        self.ghost = GhostClyde(self)
+        self.ghost_red = GhostBlinky(self)
+        self.ghost_pink = GhostPinky(self)
+        self.ghost_blue = GhostInky(self)
+        self.ghost_orange = GhostClyde(self)
 
         # Collision.set_draw_colliders(True)
 
     def on_update(self):
         self.pacman.on_update()
 
-        self.ghost.on_update()
+        self.ghost_red.on_update()
+        self.ghost_pink.on_update()
+        self.ghost_blue.on_update()
+        self.ghost_orange.on_update()
 
         Collision.check_collisions()

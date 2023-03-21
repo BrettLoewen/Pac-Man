@@ -35,11 +35,11 @@ class GhostController:
             current_cell = self.current_cell if self.next_cell == None else self.next_cell
             self.path = self.find_path(self.prev_target, current_cell)
 
-        Logger.set_line_color(Logger.LineColor.PURPLE)
-        points = []
-        for cell in self.path:
-            points.append((cell.x + (self.game_manager.GRID_CELL_SIZE // 2), cell.y + (self.game_manager.GRID_CELL_SIZE // 2)))
-        Logger.add_lines(points, False)
+        # Logger.set_line_color(Logger.LineColor.PURPLE)
+        # points = []
+        # for cell in self.path:
+        #     points.append((cell.x + (self.game_manager.GRID_CELL_SIZE // 2), cell.y + (self.game_manager.GRID_CELL_SIZE // 2)))
+        # Logger.add_lines(points, False)
 
         self.move()
 
