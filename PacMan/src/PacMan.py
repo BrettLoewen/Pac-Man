@@ -26,9 +26,9 @@ class PacMan(GameManager):
 
         self.pacman = PacManController(self)
 
-        self.ghost = GhostBlinky(self)
+        # self.ghost = GhostBlinky(self)
         # self.ghost = GhostPinky(self)
-        # self.ghost = GhostInky(self)
+        self.ghost = GhostInky(self)
         # self.ghost = GhostClyde(self)
 
         # Collision.set_draw_colliders(True)

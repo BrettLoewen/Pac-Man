@@ -1,12 +1,7 @@
 import src.Logger as Logger
-from src.Sprite import Sprite
-from src.GameManager import GameManager
 from src.Grid import GridCell, Grid, CELLS_IN_COLUMN, CELLS_IN_ROW
-from src.Collider import Collider
-import math
 from src.GhostController import GhostController
 from src.PacManController import PacManController
-# from src.PacMan import PacMan
 
 class GhostPinky(GhostController):
     def __init__(self, game_manager):
