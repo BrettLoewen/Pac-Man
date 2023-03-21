@@ -9,6 +9,10 @@ import math
 from src.PacManController import PacManController
 from src.GhostController import GhostController
 import src.CollisionManager as Collision
+from src.GhostBlinky import GhostBlinky
+from src.GhostPinky import GhostPinky
+from src.GhostInky import GhostInky
+from src.GhostClyde import GhostClyde
 
 class PacMan(GameManager):
     def __init__(self, rend: Renderer, input: Input):
@@ -22,13 +26,19 @@ class PacMan(GameManager):
 
         self.pacman = PacManController(self)
 
-        self.ghost = GhostController(self)
+        self.ghost_red = GhostBlinky(self)
+        self.ghost_pink = GhostPinky(self)
+        self.ghost_blue = GhostInky(self)
+        self.ghost_orange = GhostClyde(self)
 
-        Collision.set_draw_colliders(True)
+        # Collision.set_draw_colliders(True)
 
     def on_update(self):
         self.pacman.on_update()
 
-        self.ghost.on_update()
+        self.ghost_red.on_update()
+        self.ghost_pink.on_update()
+        self.ghost_blue.on_update()
+        self.ghost_orange.on_update()
 
         Collision.check_collisions()

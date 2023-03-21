@@ -8,7 +8,7 @@ import math
 SPEED = 2.2
 
 class GhostController:
-    def __init__(self, game_manager: GameManager):
+    def __init__(self, game_manager, texture):
         self.game_manager = game_manager
 
         self.starting_cell = self.game_manager.grid.cells[48]
@@ -20,7 +20,7 @@ class GhostController:
 
         self.collider = Collider(x, y, game_manager.ENTITY_SIZE, game_manager.ENTITY_SIZE, "Ghost")
 
-        self.sprite = Sprite("PacMan/res/textures/Inky_Left_0.png", x, y, game_manager.rend, self.game_manager.ENTITY_SIZE)
+        self.sprite = Sprite(texture, x, y, game_manager.rend, self.game_manager.ENTITY_SIZE)
 
         self.prev_target = self.game_manager.pacman.target_cell
         self.path = []
@@ -30,21 +30,24 @@ class GhostController:
         self.direction = -1
 
     def on_update(self):
-        if self.prev_target != self.game_manager.pacman.target_cell:
-            self.prev_target = self.game_manager.pacman.target_cell
+        if self.prev_target != self.calculate_target_cell():
+            self.prev_target = self.calculate_target_cell()
             current_cell = self.current_cell if self.next_cell == None else self.next_cell
-            self.path = self.find_path(self.game_manager.pacman.target_cell, current_cell)
+            self.path = self.find_path(self.prev_target, current_cell)
 
-        Logger.set_line_color(Logger.LineColor.PURPLE)
-        points = []
-        for cell in self.path:
-            points.append((cell.x + (self.game_manager.GRID_CELL_SIZE // 2), cell.y + (self.game_manager.GRID_CELL_SIZE // 2)))
-        Logger.add_lines(points, False)
+        # Logger.set_line_color(Logger.LineColor.PURPLE)
+        # points = []
+        # for cell in self.path:
+        #     points.append((cell.x + (self.game_manager.GRID_CELL_SIZE // 2), cell.y + (self.game_manager.GRID_CELL_SIZE // 2)))
+        # Logger.add_lines(points, False)
 
         self.move()
 
         self.collider.x = self.sprite.x
         self.collider.y = self.sprite.y
+
+    def calculate_target_cell(self):
+        return self.game_manager.pacman.target_cell
 
     def move(self):
         if self.next_cell == None:
@@ -112,7 +115,15 @@ class GhostController:
         start_cell.g_cost = 0
         start_cell.f_cost = start_cell.h_cost
 
-        self.calculate_path(open_cells, closed_cells, target_cell)
+        found_path = self.calculate_path(open_cells, closed_cells, target_cell)
+
+        if found_path == False:
+            for cell in self.game_manager.grid.cells:
+                cell.reset_costs()
+            open_cells = []
+            closed_cells = []
+            open_cells.append(start_cell)
+            self.calculate_path(open_cells, closed_cells, self.game_manager.pacman.target_cell)
         
         # Loop backwards through the found path and store it in a list so it can be returned
         prev = target_cell
@@ -164,6 +175,8 @@ class GhostController:
 
         if found_path == False:
             Logger.error("No path was found")
+            return False
+        return True
 
     # Determine which cell to check next
     def get_lowest_f_cost_cell(self, openCells):

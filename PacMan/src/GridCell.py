@@ -5,7 +5,7 @@ import math
 WHITE = (255, 255, 255)
 
 class GridCell:
-    def __init__(self, up, right, down, left, x, y, cell_size, rend):
+    def __init__(self, up, right, down, left, x, y, grid_x, grid_y, cell_size, rend):
         self.up = up == WHITE
         self.right = right == WHITE
         self.down = down == WHITE
@@ -18,6 +18,8 @@ class GridCell:
 
         self.x = x
         self.y = y
+        self.grid_x = grid_x
+        self.grid_y = grid_y
 
         direction = 0
         if self.up:
