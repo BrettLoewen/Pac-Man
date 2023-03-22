@@ -13,6 +13,7 @@ from src.GhostBlinky import GhostBlinky
 from src.GhostPinky import GhostPinky
 from src.GhostInky import GhostInky
 from src.GhostClyde import GhostClyde
+from src.Pellet import Pellet
 
 class PacMan(GameManager):
     def __init__(self, rend: Renderer, input: Input):
@@ -21,6 +22,7 @@ class PacMan(GameManager):
         self.SIZE_MULTIPLIER = 3
         self.ENTITY_SIZE = 13 * self.SIZE_MULTIPLIER
         self.GRID_CELL_SIZE = 23 * self.SIZE_MULTIPLIER
+        self.PELLET_SIZE = 8 * 2
 
         self.grid = Grid(rend, self.GRID_CELL_SIZE)
 
@@ -30,6 +32,13 @@ class PacMan(GameManager):
         self.ghost_pink = GhostPinky(self)
         self.ghost_blue = GhostInky(self)
         self.ghost_orange = GhostClyde(self)
+
+        pellets = []
+        for cell in self.grid.cells:
+            if cell.pellet == 1:
+                x = (cell.grid_x * self.GRID_CELL_SIZE) + (self.GRID_CELL_SIZE // 2) - (self.PELLET_SIZE // 2)
+                y = (cell.grid_y * self.GRID_CELL_SIZE) + (self.GRID_CELL_SIZE // 2) - (self.PELLET_SIZE // 2)
+                pellets.append(Pellet(x, y, rend, self.PELLET_SIZE))
 
         # Collision.set_draw_colliders(True)
 
