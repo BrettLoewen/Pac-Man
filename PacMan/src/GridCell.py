@@ -2,7 +2,7 @@ import src.Logger as Logger
 from src.Sprite import Sprite
 import math
 
-WHITE = (255, 255, 255)
+WHITE = (255, 255, 255, 255)
 
 class GridCell:
     def __init__(self, up, right, down, left, x, y, grid_x, grid_y, cell_size, rend):
