@@ -14,6 +14,7 @@ from src.GhostPinky import GhostPinky
 from src.GhostInky import GhostInky
 from src.GhostClyde import GhostClyde
 from src.Pellet import Pellet
+from src.Text import Text
 
 class PacMan(GameManager):
     def __init__(self, rend: Renderer, input: Input):
@@ -33,12 +34,15 @@ class PacMan(GameManager):
         self.ghost_blue = GhostInky(self)
         self.ghost_orange = GhostClyde(self)
 
-        pellets = []
+        self.pellets = []
         for cell in self.grid.cells:
             if cell.pellet == 1:
                 x = (cell.grid_x * self.GRID_CELL_SIZE) + (self.GRID_CELL_SIZE // 2) - (self.PELLET_SIZE // 2)
                 y = (cell.grid_y * self.GRID_CELL_SIZE) + (self.GRID_CELL_SIZE // 2) - (self.PELLET_SIZE // 2)
-                pellets.append(Pellet(x, y, rend, self.PELLET_SIZE))
+                self.pellets.append(Pellet(x, y, rend, self.PELLET_SIZE, self))
+
+        self.score = 0
+        self.score_text = Text('Score: ' + str(self.score), self.rend, 20, (0, 0, 0), (9, 6, 245), 0, 375)
 
         # Collision.set_draw_colliders(True)
 
@@ -50,4 +54,14 @@ class PacMan(GameManager):
         self.ghost_blue.on_update()
         self.ghost_orange.on_update()
 
+        for pellet in self.pellets:
+            pellet.on_update()
+
         Collision.check_collisions()
+        
+        self.score_text.string = 'Score: ' + str(self.score)
+
+    def on_eat_pellet(self, pellet):
+        self.pellets.remove(pellet)
+        pellet.disable()
+        self.score += 10

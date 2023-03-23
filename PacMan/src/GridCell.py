@@ -11,7 +11,6 @@ class GridCell:
         self.right = right == WHITE
         self.down = down == WHITE
         self.left = left == WHITE
-        Logger.info(pellet)
 
         self.up_cell = None
         self.right_cell = None

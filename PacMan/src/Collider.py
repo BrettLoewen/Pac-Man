@@ -12,6 +12,9 @@ class Collider:
 
         src.CollisionManager.add_collider(self)
 
+    def disable(self):
+        src.CollisionManager.remove_collider(self)
+
     def add_overlap_collider(self, collider, points: set[tuple]):
         self.colliders.append(collider)
 
