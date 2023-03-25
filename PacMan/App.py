@@ -46,6 +46,7 @@ while run:
     input.process_input()
 
     # Run the game logic
+    game.set_frame_info(frame, frame_rate)
     game.on_update()
 
     # Draw the game
