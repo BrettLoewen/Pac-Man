@@ -1,4 +1,5 @@
 import pygame
+import src.Logger as Logger
 
 class Sprite:
     def __init__(self, image_path, x, y, renderer, scale):
@@ -9,6 +10,9 @@ class Sprite:
         self.rend = renderer
         renderer.add_sprite(self) # This allows the sprite to be drawn
         self.set_scale(scale, scale)
+    
+    def disable(self):
+        self.rend.remove_sprite(self)
 
     # Sets the image's size
     def set_scale(self, x_scale, y_scale):

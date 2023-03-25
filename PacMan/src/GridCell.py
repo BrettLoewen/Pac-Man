@@ -2,10 +2,12 @@ import src.Logger as Logger
 from src.Sprite import Sprite
 import math
 
-WHITE = (255, 255, 255)
+WHITE = (255, 255, 255, 255)
+PELLET = (232, 167, 137, 255)
+POWER_PELLET = (0, 0, 255, 255)
 
 class GridCell:
-    def __init__(self, up, right, down, left, x, y, grid_x, grid_y, cell_size, rend):
+    def __init__(self, up, right, down, left, x, y, grid_x, grid_y, cell_size, rend, pellet):
         self.up = up == WHITE
         self.right = right == WHITE
         self.down = down == WHITE
@@ -41,6 +43,12 @@ class GridCell:
         self.h_cost = 100000
         self.f_cost = 100000
         self.parent = None
+
+        self.pellet = 0
+        if pellet == PELLET:
+            self.pellet = 1
+        elif pellet == POWER_PELLET:
+            self.pellet = 2
 
     def add_connection(self, connected_cell, direction):
         self.connections.append(connected_cell)

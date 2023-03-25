@@ -8,6 +8,10 @@ do_draw_colliders = False
 def add_collider(collider):
     colliders.append(collider)
 
+# Remove the passed collider from the list of tracked colliders
+def remove_collider(collider):
+    colliders.remove(collider)
+
 # Control the precision of the collision overlap check
 def set_collision_precision(p):
     global precision

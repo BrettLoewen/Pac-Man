@@ -30,7 +30,9 @@ class Grid:
                 x = (col // CELL_PIXEL_SIZE) * cell_size
                 y = (row // CELL_PIXEL_SIZE) * cell_size
 
-                self.cells.append(GridCell(up, right, down, left, x, y, col // 3, row // 3, cell_size, rend))
+                pellet = pixels[col + 2, row + 2]
+
+                self.cells.append(GridCell(up, right, down, left, x, y, col // 3, row // 3, cell_size, rend, pellet))
 
                 row += CELL_PIXEL_SIZE
             col += CELL_PIXEL_SIZE

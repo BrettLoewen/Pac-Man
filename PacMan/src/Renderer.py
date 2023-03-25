@@ -13,6 +13,9 @@ class Renderer:
     def add_sprite(self, sprite):
         self.sprites.append(sprite)
 
+    def remove_sprite(self, sprite):
+        self.sprites.remove(sprite)
+
     def draw_sprite(self, sprite, coords: tuple):
         self.window.blit(sprite, coords)
     
