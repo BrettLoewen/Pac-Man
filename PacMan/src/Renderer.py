@@ -16,6 +16,9 @@ class Renderer:
     def remove_sprite(self, sprite):
         self.sprites.remove(sprite)
 
+    def remove_all_sprites(self):
+        self.sprites.clear()
+
     def draw_sprite(self, sprite, coords: tuple):
         self.window.blit(sprite, coords)
     

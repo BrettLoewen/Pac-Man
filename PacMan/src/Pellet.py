@@ -6,7 +6,7 @@ PELLET_TEXTURE = 'PacMan/res/textures/Pellet.png'
 POWER_PELLET_TEXTURE = 'PacMan/res/textures/Power_Pellet.png'
 
 class Pellet():
-    def __init__(self, x, y, rend, pellet_size, pellet_type, manager):
+    def __init__(self, x, y, rend, pellet_size, pellet_type, manager, cell):
         self.x = x
         self.y = y
 
@@ -19,6 +19,7 @@ class Pellet():
 
         self.collider = Collider(x, y, pellet_size, pellet_size, "Pellet")
         self.manager = manager
+        self.cell = cell
 
     def disable(self):
         self.sprite.disable()

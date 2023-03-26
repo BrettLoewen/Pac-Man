@@ -5,11 +5,13 @@ from src.Grid import GridCell
 from src.Collider import Collider
 import math
 
-SPEED = 2.2
+SPEED = 1.2
 
 class GhostController:
-    def __init__(self, game_manager, texture):
+    def __init__(self, game_manager, texture, color_name):
         self.game_manager = game_manager
+
+        self.color_name = color_name
 
         self.starting_cell = self.game_manager.grid.cells[48]
         x = self.starting_cell.x + (self.game_manager.GRID_CELL_SIZE // 2) + (self.game_manager.ENTITY_SIZE // 2)
@@ -45,6 +47,9 @@ class GhostController:
 
         self.collider.x = self.sprite.x
         self.collider.y = self.sprite.y
+
+        if self.collider.overlaps_collider_with_tag("PacMan"):
+            self.game_manager.on_ghost_hit_pacman(self)
 
     def calculate_target_cell(self):
         return self.game_manager.pacman.target_cell
@@ -193,3 +198,7 @@ class GhostController:
 
         # Return the cell with the lowest f cost
         return lowest_cost_cell
+    
+    def die(self):
+        self.sprite.disable()
+        self.collider.disable()
