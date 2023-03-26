@@ -12,6 +12,9 @@ def add_collider(collider):
 def remove_collider(collider):
     colliders.remove(collider)
 
+def remove_all_colliders():
+    colliders.clear()
+
 # Control the precision of the collision overlap check
 def set_collision_precision(p):
     global precision

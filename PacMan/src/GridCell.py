@@ -23,6 +23,9 @@ class GridCell:
         self.grid_x = grid_x
         self.grid_y = grid_y
 
+        self.rend = rend
+        self.cell_size = cell_size
+
         direction = 0
         if self.up:
             direction += 1
@@ -95,3 +98,7 @@ class GridCell:
 
     def __repr__(self):
         return "(" + str(self.x) + ", " + str(self.y) + ")"
+    
+    def add_sprite(self):
+        sprite_name = "PacMan/res/textures/Map_" + str(self.direction) + ".png"
+        self.sprite = Sprite(sprite_name, self.x, self.y, self.rend, self.cell_size)

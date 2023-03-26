@@ -55,3 +55,7 @@ class Grid:
                 row += 1
             col += 1
             row = 0
+    
+    def add_grid_sprites(self):
+        for cell in self.cells:
+            cell.add_sprite()

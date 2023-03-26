@@ -13,7 +13,7 @@ BOTTOM_RIGHT_CELL = 97
 
 class GhostClyde(GhostController):
     def __init__(self, game_manager):
-        GhostController.__init__(self, game_manager,"PacMan/res/textures/Clyde_Left_0.png")
+        GhostController.__init__(self, game_manager,"PacMan/res/textures/Clyde_Left_0.png", "orange")
         self.scared = False
         self.current_scare_cell = None
     

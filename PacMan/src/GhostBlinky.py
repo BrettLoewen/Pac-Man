@@ -8,7 +8,7 @@ from src.GhostController import GhostController
 
 class GhostBlinky(GhostController):
     def __init__(self, game_manager: GameManager):
-        GhostController.__init__(self, game_manager,"PacMan/res/textures/Blinky_Left_0.png")
+        GhostController.__init__(self, game_manager,"PacMan/res/textures/Blinky_Left_0.png", "red")
     
     def calculate_target_cell(self):
         return super().calculate_target_cell()

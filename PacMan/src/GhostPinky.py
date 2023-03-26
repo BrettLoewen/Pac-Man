@@ -5,7 +5,7 @@ from src.PacManController import PacManController
 
 class GhostPinky(GhostController):
     def __init__(self, game_manager):
-        GhostController.__init__(self, game_manager,"PacMan/res/textures/Pinky_Left_0.png")
+        GhostController.__init__(self, game_manager,"PacMan/res/textures/Pinky_Left_0.png", "pink")
     
     def calculate_target_cell(self):
         pacman: PacManController = self.game_manager.pacman

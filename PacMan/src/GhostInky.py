@@ -5,7 +5,7 @@ from src.PacManController import PacManController
 
 class GhostInky(GhostController):
     def __init__(self, game_manager):
-        GhostController.__init__(self, game_manager,"PacMan/res/textures/Inky_Left_0.png")
+        GhostController.__init__(self, game_manager,"PacMan/res/textures/Inky_Left_0.png", "blue")
     
     def calculate_target_cell(self):
         # Get the necessary references for the AI
